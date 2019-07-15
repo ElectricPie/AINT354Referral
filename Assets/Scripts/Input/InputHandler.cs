@@ -151,6 +151,17 @@ public class InputHandler : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// Removes the observer from all observation lists
+    /// </summary>
+    /// <param name="observerToBeRemoved">The observer that will be removed</param>
+    public void RemoveFromAllObsevers(InputObserver observerToBeRemoved)
+    {
+        RemoveAxisObserver(observerToBeRemoved);
+        RemoveButtonObserver(observerToBeRemoved);
+        RemoveKeyCodeObserver(observerToBeRemoved);
+    }
 }
 
 public class EventData
