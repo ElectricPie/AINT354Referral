@@ -19,7 +19,7 @@ public class InputHandler : MonoBehaviour
 
             if (axisValue > m_observeredAxis[i].positiveTriggerValue || axisValue < m_observeredAxis[i].negativeTriggerValue)
             {
-                m_observeredAxis[i].observer.OnInputEvent(axisValue);
+                m_observeredAxis[i].observer.OnInputEvent(Input.GetRawAxis(m_observeredAxis[i].axis));
             }
         }
 
