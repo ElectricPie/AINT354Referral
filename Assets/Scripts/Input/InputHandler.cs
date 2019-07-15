@@ -100,6 +100,57 @@ public class InputHandler : MonoBehaviour
 
         m_observeredKeys.Add(newEvent);
     }
+
+    /// <summary>
+    /// Removes the given input observer if it exists in the axis observers
+    /// </summary>
+    /// <param name="observerToBeRemoved">The observer that will be removed</param>
+    public void RemoveAxisObserver(InputObserver observerToBeRemoved)
+    {
+        for (int i = 0; i < m_observeredAxis.Count; i++)
+        {
+            //Checks if the given observer is in the list
+            if (m_observeredAxis[i].observer == observerToBeRemoved)
+            {
+                m_observeredAxis.RemoveAt(i);
+                return;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Removes the given input observer if it exists in the button observers
+    /// </summary>
+    /// <param name="observerToBeRemoved">The observer that will be removed</param>
+    public void RemoveButtonObserver(InputObserver observerToBeRemoved)
+    {
+        for (int i = 0; i < m_observeredButtons.Count; i++)
+        {
+            //Checks if the given observer is in the list
+            if (m_observeredButtons[i].observer == observerToBeRemoved)
+            {
+                m_observeredButtons.RemoveAt(i);
+                return;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Removes the given input observer if it exists in the keycode observers
+    /// </summary>
+    /// <param name="observerToBeRemoved">The observer that will be removed</param>
+    public void RemoveKeyCodeObserver(InputObserver observerToBeRemoved)
+    {
+        for (int i = 0; i < m_observeredKeys.Count; i++)
+        {
+            //Checks if the given observer is in the list
+            if (m_observeredKeys[i].observer == observerToBeRemoved)
+            {
+                m_observeredKeys.RemoveAt(i);
+                return;
+            }
+        }
+    }
 }
 
 public class EventData

@@ -11,9 +11,13 @@ public class PlayerController : MonoBehaviour
     {
         m_inputHandler = this.GetComponent<InputHandler>();
 
+        TestObserver axisTest = new TestObserver();
+
         m_inputHandler.AddKeyCodeObserver(new TestObserver(), KeyCode.W);
         m_inputHandler.AddButtonObserver(new TestObserver(), "Fire1");
-        m_inputHandler.AddAxisObserver(new TestObserver(), "Horizontal", 2.0f, 2.0f);
+        m_inputHandler.AddAxisObserver(axisTest, "Horizontal", 2.0f, 2.0f);
+
+        m_inputHandler.RemoveAxisObserver(axisTest);
     }
 
     // Update is called once per frame
