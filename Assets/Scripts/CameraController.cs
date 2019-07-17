@@ -22,7 +22,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        MouseMovement();
     }
 
     private void SetUpObservers()
@@ -34,6 +34,29 @@ public class CameraController : MonoBehaviour
         //Sets the observers to listen for their input
         m_inputHandler.AddAxisObserver(m_horizontalAxisObserver, "Horizontal", 0.1f, -0.1f);
         m_inputHandler.AddAxisObserver(m_verticalAxisObserver, "Vertical", 0.1f, -0.1f);
+    }
+
+    public void MouseMovement()
+    {
+        //Vertical mouse movement
+        if (Input.mousePosition.y >= Screen.height * 0.95)
+        {
+            MoveCameraVertically(1);
+        }
+        else if (Input.mousePosition.y <= Screen.height * 0.05)
+        {
+            MoveCameraVertically(-1);
+        }
+
+        //Horizontal mouse movement
+        if (Input.mousePosition.x >= Screen.width * 0.95)
+        {
+            MoveCameraHorizontally(1);
+        }
+        else if (Input.mousePosition.x <= Screen.width * 0.05)
+        {
+            MoveCameraHorizontally(-1);
+        }
     }
 
     public void MoveCameraHorizontally(float directionValaue)
