@@ -1,10 +1,12 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
     public float speed = 0.1f;
+
+    public bool mouseScrollingIsEnabled = true;
 
     //Private
     private InputHandler m_inputHandler;
@@ -38,24 +40,27 @@ public class CameraController : MonoBehaviour
 
     public void MouseMovement()
     {
-        //Vertical mouse movement
-        if (Input.mousePosition.y >= Screen.height * 0.95)
+        if (mouseScrollingIsEnabled)
         {
-            MoveCameraVertically(1);
-        }
-        else if (Input.mousePosition.y <= Screen.height * 0.05)
-        {
-            MoveCameraVertically(-1);
-        }
+            //Vertical mouse movement
+            if (Input.mousePosition.y >= Screen.height * 0.95)
+            {
+                MoveCameraVertically(1);
+            }
+            else if (Input.mousePosition.y <= Screen.height * 0.05)
+            {
+                MoveCameraVertically(-1);
+            }
 
-        //Horizontal mouse movement
-        if (Input.mousePosition.x >= Screen.width * 0.95)
-        {
-            MoveCameraHorizontally(1);
-        }
-        else if (Input.mousePosition.x <= Screen.width * 0.05)
-        {
-            MoveCameraHorizontally(-1);
+            //Horizontal mouse movement
+            if (Input.mousePosition.x >= Screen.width * 0.95)
+            {
+                MoveCameraHorizontally(1);
+            }
+            else if (Input.mousePosition.x <= Screen.width * 0.05)
+            {
+                MoveCameraHorizontally(-1);
+            }
         }
     }
 
