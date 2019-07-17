@@ -9,6 +9,6 @@ public class HorizontalCameraAxisObserver : AxisCameraObserver
 
     public override void OnInputEvent(float value)
     {
-        m_cameraController.transform.position += m_cameraController.transform.right * value * 0.1f;
+        m_cameraController.MoveCameraHorizontally(value);
     }
 }

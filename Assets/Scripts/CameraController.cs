@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public float speed = 0.1f;
+
     //Private
     private InputHandler m_inputHandler;
     private HorizontalCameraAxisObserver m_horizontalAxisObserver;
@@ -22,5 +24,10 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void MoveCameraHorizontally(float directionValaue)
+    {
+        this.transform.position += this.transform.right * directionValaue * speed;
     }
 }
