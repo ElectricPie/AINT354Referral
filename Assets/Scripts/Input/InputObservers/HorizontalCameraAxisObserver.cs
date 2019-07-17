@@ -2,22 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HorizontalCameraAxisObserver : InputObserver
+public class HorizontalCameraAxisObserver : AxisCameraObserver
 {
-    private GameObject m_camera;
-
-    public HorizontalCameraAxisObserver()
-    {
-        m_camera = null;
-    }
-
-    public HorizontalCameraAxisObserver(GameObject camera)
-    {
-        m_camera = camera;
-    }
+    public HorizontalCameraAxisObserver() : base() { }
+    public HorizontalCameraAxisObserver(CameraController cameraController) : base(cameraController) { }
 
     public override void OnInputEvent(float value)
     {
-        m_camera.transform.position += m_camera.transform.right * value * 0.1f;
+        m_cameraController.transform.position += m_cameraController.transform.right * value * 0.1f;
     }
 }

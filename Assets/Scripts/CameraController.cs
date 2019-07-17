@@ -13,7 +13,7 @@ public class CameraController : MonoBehaviour
     {
         m_inputHandler = this.GetComponent<InputHandler>();
 
-        m_horizontalAxisObserver = new HorizontalCameraAxisObserver(this.gameObject);
+        m_horizontalAxisObserver = new HorizontalCameraAxisObserver(this);
 
         m_inputHandler.AddAxisObserver(m_horizontalAxisObserver, "Horizontal", 0.1f, -0.1f);
     }
