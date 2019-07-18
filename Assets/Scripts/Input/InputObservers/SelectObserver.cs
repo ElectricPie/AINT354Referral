@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class SelectObserver : MonoBehaviour
 {
-    private static InputHandler m_inputHandler;
-
     // Start is called before the first frame update
     void Start()
     {
-        m_inputHandler = this.GetComponent<InputHandler>();
-
+        
     }
 
     // Update is called once per frame
