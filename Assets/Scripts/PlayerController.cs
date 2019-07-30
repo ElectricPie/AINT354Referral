@@ -39,14 +39,23 @@ public class PlayerController : MonoBehaviour
         {
             if (hit.transform.tag == "Selectable")
             {
-                //Deselects the previous unit
+                //Calls the previouslty selected object and calls its deselection method
                 if (m_selectedObject != null)
                 {
-                    m_selectedObject.GetComponent<Unit>().DeSelect();
+                    if (m_selectedObject.GetComponent<Unit>())
+                    {
+                        m_selectedObject.GetComponent<Unit>().DeSelect();
+                    }
                 }
 
+                //Selects the new object
                 m_selectedObject = hit.transform.gameObject;
-                m_selectedObject.GetComponent<Unit>().Select();
+
+                //Calls the selected objects selection method
+                if (m_selectedObject.GetComponent<Unit>())
+                {
+                    m_selectedObject.GetComponent<Unit>().Select();
+                }
             }
             else
             {

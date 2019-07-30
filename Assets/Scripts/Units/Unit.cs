@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public abstract class Unit : Attackable
 {
@@ -33,7 +34,10 @@ public abstract class Unit : Attackable
 
     public void DeSelect()
     {
-
+        for (int i = 0; i < m_buildButtons.buttons.Length; i++)
+        {
+            m_buildButtons.buttons[i].SetActive(false);
+        }
     }
 
     private void UpdateBuildUI()
@@ -43,6 +47,8 @@ public abstract class Unit : Attackable
             //Checks if the building isnt null
             if (buildingList[i] != null) {
                 m_buildButtons.buttons[i].SetActive(true);
+                //Changes the buttons sprite
+                m_buildButtons.buttons[i].GetComponent<Image>().sprite = buildingList[i].GetComponent<BuildingInfo>().icon;
             }
             else
             {
