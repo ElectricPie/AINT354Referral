@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public abstract class Unit : Attackable
 {
     //Protected
-    protected int damage;
+    protected int m_damage;
     protected NavMeshAgent m_navAgent;
 
     void Start()
