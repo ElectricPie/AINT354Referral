@@ -1,10 +1,13 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public abstract class Unit : Attackable
 {
+    //Public
+    public GameObject[] buildingList = new GameObject[12];
+
     //Protected
     protected int m_damage;
     protected NavMeshAgent m_navAgent;
