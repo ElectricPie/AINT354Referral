@@ -57,4 +57,16 @@ public abstract class Unit : Attackable
             }
         }
     }
+
+    public void BuildBuilding(int buildingIndexValue)
+    {
+        if (buildingList[buildingIndexValue] != null)
+        {
+            Debug.Log("Building: " + buildingList[buildingIndexValue]);
+        }
+        else
+        {
+            Debug.Log("Unit does not have a building in that slot");
+        }
+    }
 }

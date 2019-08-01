@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -32,34 +33,38 @@ public class PlayerController : MonoBehaviour
 
     public void SelectObject()
     {
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out hit))
+        //Prevents raycasting if mouse is over the UI
+        if (!EventSystem.current.IsPointerOverGameObject())
         {
-            if (hit.transform.tag == "Selectable")
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit))
             {
-                //Calls the previouslty selected object and calls its deselection method
-                if (m_selectedObject != null)
+                if (hit.transform.tag == "Selectable")
                 {
+                    //Calls the previouslty selected object and calls its deselection method
+                    if (m_selectedObject != null)
+                    {
+                        if (m_selectedObject.GetComponent<Unit>())
+                        {
+                            m_selectedObject.GetComponent<Unit>().DeSelect();
+                        }
+                    }
+
+                    //Selects the new object
+                    m_selectedObject = hit.transform.gameObject;
+
+                    //Calls the selected objects selection method
                     if (m_selectedObject.GetComponent<Unit>())
                     {
-                        m_selectedObject.GetComponent<Unit>().DeSelect();
+                        m_selectedObject.GetComponent<Unit>().Select();
                     }
                 }
-
-                //Selects the new object
-                m_selectedObject = hit.transform.gameObject;
-
-                //Calls the selected objects selection method
-                if (m_selectedObject.GetComponent<Unit>())
+                else
                 {
-                    m_selectedObject.GetComponent<Unit>().Select();
+                    m_selectedObject = null;
                 }
-            }
-            else
-            {
-                m_selectedObject = null;
             }
         }
     }
@@ -78,5 +83,22 @@ public class PlayerController : MonoBehaviour
 
                 
         }
+    }
+
+    public void BuildFromSelectedUnit(int buildingIndexValue)
+    {
+        Debug.Log("Pressed");
+
+        //Error prevention
+        if(m_selectedObject != null)
+        {
+            //Makes sure the object is a unit
+            if (m_selectedObject.GetComponent<Unit>())
+            {
+                //Calls the method for creating a building from the selected unit
+                m_selectedObject.GetComponent<Unit>().BuildBuilding(buildingIndexValue);
+            }
+        }
+       
     }
 }
