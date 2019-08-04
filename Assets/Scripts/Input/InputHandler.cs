@@ -141,11 +141,13 @@ public class InputHandler : MonoBehaviour
     /// <param name="observerToBeRemoved">The observer that will be removed</param>
     public void RemoveKeyCodeObserver(InputObserver observerToBeRemoved)
     {
+        Debug.Log("Removing Keycode Observer");
         for (int i = 0; i < m_observeredKeys.Count; i++)
         {
             //Checks if the given observer is in the list
             if (m_observeredKeys[i].observer == observerToBeRemoved)
             {
+                Debug.Log("Observers Match");
                 m_observeredKeys.RemoveAt(i);
                 return;
             }

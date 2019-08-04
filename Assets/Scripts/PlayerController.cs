@@ -41,16 +41,18 @@ public class PlayerController : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
+                //Calls the previouslty selected object and calls its deselection method
+                if (m_selectedObject != null)
+                {
+                    if (m_selectedObject.GetComponent<Unit>())
+                    {
+                        m_selectedObject.GetComponent<Unit>().DeSelect();
+                    }
+                }
+
+                //Selects the new object if it is selectable
                 if (hit.transform.tag == "Selectable")
                 {
-                    //Calls the previouslty selected object and calls its deselection method
-                    if (m_selectedObject != null)
-                    {
-                        if (m_selectedObject.GetComponent<Unit>())
-                        {
-                            m_selectedObject.GetComponent<Unit>().DeSelect();
-                        }
-                    }
 
                     //Selects the new object
                     m_selectedObject = hit.transform.gameObject;
