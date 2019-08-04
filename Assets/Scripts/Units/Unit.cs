@@ -29,7 +29,6 @@ public abstract class Unit : Attackable
         for (int i = 0; i < m_hotkeyObservers.Length; i++)
         {
             m_hotkeyObservers[i] = new HotkeyObserver(this, i);
-            Debug.Log("New hotkey: " + m_hotkeyObservers[i]);
         }
     }
 
@@ -42,14 +41,12 @@ public abstract class Unit : Attackable
 
     public void Select()
     {
-        Debug.Log("Selected: " + gameObject);
         UpdateBuildUI();
         EnableHotkeys();
     }
 
     public void DeSelect()
     {
-        Debug.Log("Deselecting: " + gameObject);
         for (int i = 0; i < m_buildButtons.buttons.Length; i++)
         {
             m_buildButtons.buttons[i].SetActive(false);
