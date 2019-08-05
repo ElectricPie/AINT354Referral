@@ -21,8 +21,8 @@ public class PlayerController : MonoBehaviour
         m_selectObserver = new SelectObserver(this);
         m_moveObserver = new MoveObserver(this);
 
-        m_inputHandler.AddButtonObserver(m_selectObserver, "Fire1");
-        m_inputHandler.AddButtonObserver(m_moveObserver, "Fire2");
+        m_inputHandler.AddButtonObserverDown(m_selectObserver, "Fire1");
+        m_inputHandler.AddButtonObserverDown(m_moveObserver, "Fire2");
     }
 
     // Update is called once per frame

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -95,7 +95,7 @@ public abstract class Unit : Attackable
                 //Prevents hotkeys from being activated if no building is in the building slot
                 if (buildingList[i] != null)
                 {
-                    m_inputHandler.AddKeyCodeObserver(m_hotkeyObservers[i], m_buildHotkeys[i]);
+                    m_inputHandler.AddKeyCodeDownObserver(m_hotkeyObservers[i], m_buildHotkeys[i]);
                 }
             }
         }
@@ -108,7 +108,7 @@ public abstract class Unit : Attackable
         {
             for (int i = 0; i < buildingList.Length; i++)
             {
-                m_inputHandler.RemoveKeyCodeObserver(m_hotkeyObservers[i]);
+                m_inputHandler.RemoveKeyCodeUpObserver(m_hotkeyObservers[i]);
             }
         }
     }

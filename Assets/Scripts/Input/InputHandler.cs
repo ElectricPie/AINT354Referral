@@ -7,7 +7,11 @@ public class InputHandler : MonoBehaviour
     //Private
     private List<EventData> m_observeredAxis = new List<EventData>();
     private List<EventData> m_observeredButtons = new List<EventData>();
+    private List<EventData> m_observeredButtonsUp = new List<EventData>();
+    private List<EventData> m_observeredButtonsDown = new List<EventData>();
     private List<EventData> m_observeredKeys = new List<EventData>();
+    private List<EventData> m_observeredKeysUp = new List<EventData>();
+    private List<EventData> m_observeredKeysDown = new List<EventData>();
 
     // Update is called once per frame
     void Update()
@@ -23,7 +27,8 @@ public class InputHandler : MonoBehaviour
             }
         }
 
-        //Buttons
+        ///Buttons
+        //Constant
         for (int i = 0; i < m_observeredButtons.Count; i++)
         {
             if (Input.GetButton(m_observeredButtons[i].button))
@@ -32,12 +37,49 @@ public class InputHandler : MonoBehaviour
             }
         }
 
-        //Keys
+        //Up
+        for (int i = 0; i < m_observeredButtonsUp.Count; i++)
+        {
+            if (Input.GetButtonUp(m_observeredButtonsUp[i].button))
+            {
+                m_observeredButtonsUp[i].observer.OnInputEvent(1.0f);
+            }
+        }
+
+        //Down
+        for (int i = 0; i < m_observeredButtonsDown.Count; i++)
+        {
+            if (Input.GetButtonDown(m_observeredButtonsDown[i].button))
+            {
+                m_observeredButtonsDown[i].observer.OnInputEvent(1.0f);
+            }
+        }
+
+        ///Keys
+        //Constant
         for (int i = 0; i < m_observeredKeys.Count; i++)
         {
             if (Input.GetKey(m_observeredKeys[i].keyCode))
             {
                 m_observeredKeys[i].observer.OnInputEvent(1.0f);
+            }
+        }
+
+        //Up
+        for (int i = 0; i < m_observeredKeysUp.Count; i++)
+        {
+            if (Input.GetKeyUp(m_observeredKeysUp[i].keyCode))
+            {
+                m_observeredKeysUp[i].observer.OnInputEvent(1.0f);
+            }
+        }
+
+        //Down
+        for (int i = 0; i < m_observeredKeysDown.Count; i++)
+        {
+            if (Input.GetKeyDown(m_observeredKeysDown[i].keyCode))
+            {
+                m_observeredKeysDown[i].observer.OnInputEvent(1.0f);
             }
         }
     }
@@ -88,6 +130,34 @@ public class InputHandler : MonoBehaviour
     }
 
     /// <summary>
+    /// Adds a new observer using buttons up
+    /// </summary>
+    /// <param name="newObserver">The observer to be added</param>
+    /// <param name="keyCode">The name button that will cause the notification</param>
+    public void AddButtonObserverUp(InputObserver newObserver, string buttonName)
+    {
+        EventData newEvent = new EventData();
+        newEvent.button = buttonName;
+        newEvent.observer = newObserver;
+
+        m_observeredButtonsUp.Add(newEvent);
+    }
+
+    /// <summary>
+    /// Adds a new observer using buttons
+    /// </summary>
+    /// <param name="newObserver">The observer to be added</param>
+    /// <param name="keyCode">The name button that will cause the notification</param>
+    public void AddButtonObserverDown(InputObserver newObserver, string buttonName)
+    {
+        EventData newEvent = new EventData();
+        newEvent.button = buttonName;
+        newEvent.observer = newObserver;
+
+        m_observeredButtonsDown.Add(newEvent);
+    }
+
+    /// <summary>
     /// Adds a new observer using keycodes
     /// </summary>
     /// <param name="newObserver">The observer to be added</param>
@@ -99,6 +169,34 @@ public class InputHandler : MonoBehaviour
         newEvent.observer = newObserver;
 
         m_observeredKeys.Add(newEvent);
+    }
+
+    /// <summary>
+    /// Adds a new observer using keycodes up
+    /// </summary>
+    /// <param name="newObserver">The observer to be added</param>
+    /// <param name="keyCode">The keycode that will cause the notification</param>
+    public void AddKeyCodeUpObserver(InputObserver newObserver, KeyCode keyCode)
+    {
+        EventData newEvent = new EventData();
+        newEvent.keyCode = keyCode;
+        newEvent.observer = newObserver;
+
+        m_observeredKeysUp.Add(newEvent);
+    }
+
+    /// <summary>
+    /// Adds a new observer using keycodes down
+    /// </summary>
+    /// <param name="newObserver">The observer to be added</param>
+    /// <param name="keyCode">The keycode that will cause the notification</param>
+    public void AddKeyCodeDownObserver(InputObserver newObserver, KeyCode keyCode)
+    {
+        EventData newEvent = new EventData();
+        newEvent.keyCode = keyCode;
+        newEvent.observer = newObserver;
+
+        m_observeredKeysDown.Add(newEvent);
     }
 
     /// <summary>
@@ -136,6 +234,40 @@ public class InputHandler : MonoBehaviour
     }
 
     /// <summary>
+    /// Removes the given input observer if it exists in the button up observers
+    /// </summary>
+    /// <param name="observerToBeRemoved">The observer that will be removed</param>
+    public void RemoveButtonObserverUp(InputObserver observerToBeRemoved)
+    {
+        for (int i = 0; i < m_observeredButtonsUp.Count; i++)
+        {
+            //Checks if the given observer is in the list
+            if (m_observeredButtonsUp[i].observer == observerToBeRemoved)
+            {
+                m_observeredButtonsUp.RemoveAt(i);
+                return;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Removes the given input observer if it exists in the button observers
+    /// </summary>
+    /// <param name="observerToBeRemoved">The observer that will be removed</param>
+    public void RemoveButtonObserverDown(InputObserver observerToBeRemoved)
+    {
+        for (int i = 0; i < m_observeredButtonsDown.Count; i++)
+        {
+            //Checks if the given observer is in the list
+            if (m_observeredButtonsDown[i].observer == observerToBeRemoved)
+            {
+                m_observeredButtonsDown.RemoveAt(i);
+                return;
+            }
+        }
+    }
+
+    /// <summary>
     /// Removes the given input observer if it exists in the keycode observers
     /// </summary>
     /// <param name="observerToBeRemoved">The observer that will be removed</param>
@@ -153,6 +285,40 @@ public class InputHandler : MonoBehaviour
     }
 
     /// <summary>
+    /// Removes the given input observer if it exists in the keycode up observers
+    /// </summary>
+    /// <param name="observerToBeRemoved">The observer that will be removed</param>
+    public void RemoveKeyCodeUpObserver(InputObserver observerToBeRemoved)
+    {
+        for (int i = 0; i < m_observeredKeysUp.Count; i++)
+        {
+            //Checks if the given observer is in the list
+            if (m_observeredKeysUp[i].observer == observerToBeRemoved)
+            {
+                m_observeredKeysUp.RemoveAt(i);
+                return;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Removes the given input observer if it exists in the keycode down observers
+    /// </summary>
+    /// <param name="observerToBeRemoved">The observer that will be removed</param>
+    public void RemoveKeyCodeDownObserver(InputObserver observerToBeRemoved)
+    {
+        for (int i = 0; i < m_observeredKeysDown.Count; i++)
+        {
+            //Checks if the given observer is in the list
+            if (m_observeredKeysDown[i].observer == observerToBeRemoved)
+            {
+                m_observeredKeysDown.RemoveAt(i);
+                return;
+            }
+        }
+    }
+
+    /// <summary>
     /// Removes the observer from all observation lists
     /// </summary>
     /// <param name="observerToBeRemoved">The observer that will be removed</param>
@@ -161,6 +327,7 @@ public class InputHandler : MonoBehaviour
         RemoveAxisObserver(observerToBeRemoved);
         RemoveButtonObserver(observerToBeRemoved);
         RemoveKeyCodeObserver(observerToBeRemoved);
+        RemoveKeyCodeDownObserver(observerToBeRemoved);
     }
 }
 
