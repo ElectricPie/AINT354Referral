@@ -20,6 +20,9 @@ public abstract class Unit : Attackable
     protected HotkeyObserver[] m_hotkeyObservers = new HotkeyObserver[12];
     protected InputHandler m_inputHandler;
 
+    protected GameObject m_ghostBuilding;
+    protected CancelGhostBuildingObserver m_cancelBuildingObserver;
+
     void Start()
     {
         m_navAgent = this.GetComponent<NavMeshAgent>();
@@ -31,6 +34,8 @@ public abstract class Unit : Attackable
         {
             m_hotkeyObservers[i] = new HotkeyObserver(this, i);
         }
+
+        m_cancelBuildingObserver = new CancelGhostBuildingObserver(this);
     }
 
     public void MoveToDestination(Vector3 destination)
@@ -74,16 +79,31 @@ public abstract class Unit : Attackable
         }
     }
 
+    private void DisableUIBuildMenu()
+    {
+        for (int i = 0; i < m_buildButtons.buttons.Length; i++)
+        {
+            m_buildButtons.buttons[i].SetActive(false);
+        }
+    }
+
     public void BuildBuilding(int buildingIndexValue)
     {
         if (buildingList[buildingIndexValue] != null)
         {
-            //Disables the hotkeys so that it no other building ghost are created
+            //Disables the hotkeys and the build menu so that it no other building ghost are created
             DisableHotkeys();
+            DisableUIBuildMenu();
 
             //Creats a new building in the game
-            GameObject ghostBuilding = Instantiate(buildingList[buildingIndexValue]);
-            ghostBuilding.AddComponent<BuildingGhost>();
+            m_ghostBuilding = Instantiate(buildingList[buildingIndexValue]);
+            m_ghostBuilding.AddComponent<BuildingGhost>();
+
+            
+            if (m_inputHandler != null)
+            {
+                m_inputHandler.AddKeyCodeDownObserver(m_cancelBuildingObserver, KeyCode.Escape);
+            }
         }
         else
         {
@@ -117,5 +137,16 @@ public abstract class Unit : Attackable
                 m_inputHandler.RemoveKeyCodeDownObserver(m_hotkeyObservers[i]);
             }
         }
+    }
+
+    public void CancelBuilding()
+    {
+        Destroy(m_ghostBuilding);
+        //Renables the hotkeys and build menu
+        EnableHotkeys();
+        UpdateBuildUI();
+
+        //Removes the cancel keycode observers
+        m_inputHandler.RemoveKeyCodeDownObserver(m_cancelBuildingObserver);
     }
 }
