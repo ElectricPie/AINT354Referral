@@ -82,15 +82,11 @@ public class PlayerController : MonoBehaviour
             {
                 m_selectedObject.GetComponent<Unit>().MoveToDestination(hit.point);
             }
-
-                
         }
     }
 
     public void BuildFromSelectedUnit(int buildingIndexValue)
     {
-        Debug.Log("Pressed");
-
         //Error prevention
         if(m_selectedObject != null)
         {

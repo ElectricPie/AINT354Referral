@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 4113044569854104096}
   - component: {fileID: 3931361042547187958}
   - component: {fileID: 111961571}
-  - component: {fileID: 111961570}
   m_Layer: 0
   m_Name: TestBuilding
   m_TagString: Selectable
@@ -127,20 +126,3 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
---- !u!114 &111961570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 915361347096330268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09e353003ad63d54aad82c278a6962ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseHealth: 20
-  m_healthPerUpgrade: 5
-  createableUnits:
-  - {fileID: 8970713159666227673, guid: d22ae7bd097ce3f42b6166f915ca09e3, type: 3}
-  - {fileID: 8970713159666227673, guid: d22ae7bd097ce3f42b6166f915ca09e3, type: 3}

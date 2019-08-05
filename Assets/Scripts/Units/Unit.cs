@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,6 +8,7 @@ public abstract class Unit : Attackable
 {
     //Public
     public GameObject[] buildingList = new GameObject[12];
+    public GameObject buildingGhostPrefab;
 
     //Protected
     protected int m_damage;
@@ -77,7 +78,12 @@ public abstract class Unit : Attackable
     {
         if (buildingList[buildingIndexValue] != null)
         {
-            Debug.Log("Building: " + buildingList[buildingIndexValue]);
+            //Disables the hotkeys so that it no other building ghost are created
+            DisableHotkeys();
+
+            //Creats a new building in the game
+            GameObject ghostBuilding = Instantiate(buildingList[buildingIndexValue]);
+            ghostBuilding.AddComponent<BuildingGhost>();
         }
         else
         {
@@ -108,7 +114,7 @@ public abstract class Unit : Attackable
         {
             for (int i = 0; i < buildingList.Length; i++)
             {
-                m_inputHandler.RemoveKeyCodeUpObserver(m_hotkeyObservers[i]);
+                m_inputHandler.RemoveKeyCodeDownObserver(m_hotkeyObservers[i]);
             }
         }
     }
