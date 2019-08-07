@@ -13,22 +13,27 @@ public abstract class Unit : Attackable
     //Protected
     protected int m_damage;
     protected NavMeshAgent m_navAgent;
-    protected BuildMenuButtons m_buildButtons;
-    protected KeyCode[] m_buildHotkeys = new KeyCode[12] {KeyCode.Q, KeyCode.W, KeyCode.E, KeyCode.R,
+
+    //Private
+    private BuildMenuButtons m_buildButtons;
+    private KeyCode[] m_buildHotkeys = new KeyCode[12] {KeyCode.Q, KeyCode.W, KeyCode.E, KeyCode.R,
                                                         KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.F,
                                                         KeyCode.Z, KeyCode.X, KeyCode.C, KeyCode.V};
-    protected HotkeyObserver[] m_hotkeyObservers = new HotkeyObserver[12];
-    protected InputHandler m_inputHandler;
-
-    protected GameObject m_ghostBuilding;
-    protected CancelGhostBuildingObserver m_cancelBuildingObserver;
-    protected PlaceBuildingObserver m_placeBuildingObserver;
+    private HotkeyObserver[] m_hotkeyObservers = new HotkeyObserver[12];
+    private InputHandler m_inputHandler;
+    private GameObject m_ghostBuilding;
+    private CancelGhostBuildingObserver m_cancelBuildingObserver;
+    private PlaceBuildingObserver m_placeBuildingObserver;
+    private PlayerController m_playerController;
 
     void Start()
     {
         m_navAgent = this.GetComponent<NavMeshAgent>();
         m_buildButtons = GameObject.Find("BuildMenu").GetComponent<BuildMenuButtons>();
-        m_inputHandler = GameObject.Find("_PlayerController").GetComponent<InputHandler>();
+
+        GameObject playerObject = GameObject.Find("_PlayerController");
+        m_inputHandler = playerObject.GetComponent<InputHandler>();
+        m_playerController = playerObject.GetComponent<PlayerController>();
 
         //Sets up the hotkey observers passing them this script and the building index they will represent
         for (int i = 0; i < m_hotkeyObservers.Length; i++)
@@ -154,6 +159,8 @@ public abstract class Unit : Attackable
     public void CreateBuilding()
     {
         m_ghostBuilding.GetComponent<BuildingGhost>().PlaceBuilding();
+        Debug.Log("This: " + this.gameObject);
+        m_playerController.SelectedObject = this.gameObject;
 
         RenableBuilding();
     }
