@@ -22,6 +22,7 @@ public abstract class Unit : Attackable
 
     protected GameObject m_ghostBuilding;
     protected CancelGhostBuildingObserver m_cancelBuildingObserver;
+    protected PlaceBuildingObserver m_placeBuildingObserver;
 
     void Start()
     {
@@ -35,7 +36,9 @@ public abstract class Unit : Attackable
             m_hotkeyObservers[i] = new HotkeyObserver(this, i);
         }
 
+        //Sets up other observers
         m_cancelBuildingObserver = new CancelGhostBuildingObserver(this);
+        m_placeBuildingObserver = new PlaceBuildingObserver(this);
     }
 
     public void MoveToDestination(Vector3 destination)
@@ -103,6 +106,7 @@ public abstract class Unit : Attackable
             if (m_inputHandler != null)
             {
                 m_inputHandler.AddKeyCodeDownObserver(m_cancelBuildingObserver, KeyCode.Escape);
+                m_inputHandler.AddKeyCodeDownObserver(m_placeBuildingObserver, KeyCode.Mouse0);
             }
         }
         else
@@ -141,12 +145,27 @@ public abstract class Unit : Attackable
 
     public void CancelBuilding()
     {
+        //Destroys the ghost
         Destroy(m_ghostBuilding);
+
+        RenableBuilding();
+    }
+
+    public void CreateBuilding()
+    {
+        m_ghostBuilding.GetComponent<BuildingGhost>().PlaceBuilding();
+
+        RenableBuilding();
+    }
+
+    private void RenableBuilding()
+    {
         //Renables the hotkeys and build menu
         EnableHotkeys();
         UpdateBuildUI();
 
         //Removes the cancel keycode observers
         m_inputHandler.RemoveKeyCodeDownObserver(m_cancelBuildingObserver);
+        m_inputHandler.RemoveKeyCodeDownObserver(m_placeBuildingObserver);
     }
 }

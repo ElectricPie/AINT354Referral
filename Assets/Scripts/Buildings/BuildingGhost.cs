@@ -41,4 +41,13 @@ public class BuildingGhost : MonoBehaviour
             }
         }
     }
+
+    public void PlaceBuilding()
+    {
+        //Renables the nav mesh obstical so units will pathfind around it
+        this.GetComponent<NavMeshObstacle>().enabled = true;
+
+        //Removes this scirpt from the building object
+        Destroy(this);
+    }
 }
