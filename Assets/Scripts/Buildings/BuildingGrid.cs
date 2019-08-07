@@ -14,7 +14,7 @@ public class BuildingGrid : MonoBehaviour
     {
         //Rounds the given position to the closest point on the grid
         position.x = Mathf.Round(position.x * 1 / gridSpacing) * gridSpacing;
-        position.z = Mathf.Round(position.x * 1 / gridSpacing) * gridSpacing;
+        position.z = Mathf.Round(position.z * 1 / gridSpacing) * gridSpacing;
 
         return position;
     }

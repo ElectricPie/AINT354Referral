@@ -5,9 +5,6 @@ using UnityEngine.AI;
 
 public class BuildingGhost : MonoBehaviour
 {
-    //Public
-    public GameObject ghost;
-
     //Private
     private BuildingGrid m_grid;
 
@@ -29,10 +26,14 @@ public class BuildingGhost : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            //this.transform.position = hit.point;
             if (m_grid != null)
             {
-                this.transform.position = m_grid.GetNearestPoint(hit.point);
+                //Gets the position of the nearest point from the grid
+                Vector3 position = m_grid.GetNearestPoint(hit.point);
+                //Fixes the y position so it dose not float
+                position.y = 1;
+
+                this.transform.position = position;
             }
             else
             {
