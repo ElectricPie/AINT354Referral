@@ -77,12 +77,22 @@ public class CameraController : MonoBehaviour
 
     public void MoveCameraHorizontally(float directionValaue)
     {
-        this.transform.position += this.transform.right * directionValaue * speed;
+        //Disables A and D from moving whilst still keeping the horizontal input
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) { }
+        else
+        {
+            this.transform.position += this.transform.right * directionValaue * speed;
+        }
     }
 
     public void MoveCameraVertically(float directionValaue)
     {
-        this.transform.position += this.transform.forward * directionValaue * speed;
+        //Disables W and S from moving whilst still keeping the vertical input
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)) { }
+        else
+        {
+            this.transform.position += this.transform.forward * directionValaue * speed;
+        }
     }
 
     public void ZoomCamera(float directionValue)
