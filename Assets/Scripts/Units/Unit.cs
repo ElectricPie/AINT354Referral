@@ -158,11 +158,17 @@ public abstract class Unit : Attackable
 
     public void CreateBuilding()
     {
-        m_ghostBuilding.GetComponent<BuildingGhost>().PlaceBuilding();
-        Debug.Log("This: " + this.gameObject);
-        m_playerController.SelectedObject = this.gameObject;
+        //Resets the keybindings if placing the building was succesful
+        if (m_ghostBuilding.GetComponent<BuildingGhost>().PlaceBuilding())
+        {
+            m_playerController.SelectedObject = this.gameObject;
 
-        RenableBuilding();
+            RenableBuilding();
+        }
+        else
+        {
+            Debug.Log("Cannot Place Building");
+        }
     }
 
     private void RenableBuilding()
