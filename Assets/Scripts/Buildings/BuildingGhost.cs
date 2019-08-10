@@ -15,8 +15,8 @@ public class BuildingGhost : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Prevents the raycast from hitting the building
         this.gameObject.layer = 2;
-        //this.GetComponent<Collider>().enabled = false;
         this.GetComponent<NavMeshObstacle>().enabled = false;
 
         m_grid = GameObject.Find("_Grid").GetComponent<BuildingGrid>();
@@ -53,6 +53,9 @@ public class BuildingGhost : MonoBehaviour
         //Places the building if nothing is colliding with it and returns if it is succesful
         if (m_collisionList.Count == 0)
         {
+            //Allows raycasts to hit the building
+            this.gameObject.layer = 0;
+
             //Renables the nav mesh obstical so units will pathfind around it
             this.GetComponent<NavMeshObstacle>().enabled = true;
 

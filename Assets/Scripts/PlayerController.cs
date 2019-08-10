@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private SelectObserver m_selectObserver;
     private MoveObserver m_moveObserver;
 
+    [SerializeField]
     private GameObject m_selectedObject;
 
     // Start is called before the first frame update
