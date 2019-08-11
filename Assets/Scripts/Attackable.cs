@@ -84,9 +84,12 @@ public abstract class Attackable : MonoBehaviour
             //Checks if the building isnt null
             if (createables[i] != null)
             {
-                m_buildButtons.buttons[i].SetActive(true);
-                //Changes the buttons sprite
-                m_buildButtons.buttons[i].GetComponent<Image>().sprite = createables[i].GetComponent<BuildingInfo>().icon;
+                if (createables[i].GetComponent<Building>())
+                {
+                    m_buildButtons.buttons[i].SetActive(true);
+                    //Changes the buttons sprite
+                    m_buildButtons.buttons[i].GetComponent<Image>().sprite = createables[i].GetComponent<Building>().icon;
+                }
             }
             else
             {

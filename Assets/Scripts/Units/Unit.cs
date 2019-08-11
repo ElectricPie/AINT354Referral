@@ -35,7 +35,6 @@ public abstract class Unit : Attackable
         m_navAgent.SetDestination(destination);
     }
 
-
     public void BuildBuilding(int buildingIndexValue)
     {
         if (createables[buildingIndexValue] != null)
