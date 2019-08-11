@@ -8,6 +8,11 @@ public abstract class Attackable : MonoBehaviour
     public int baseHealth;
     public int m_healthPerUpgrade;
 
+    public string description = "";
+    //public Resoruce resourceTypeRequired;
+    public int resourceCost = 0;
+    public Sprite icon = null;
+
     public GameObject[] createables = new GameObject[12];
 
     //Protected

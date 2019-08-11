@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class Building : Attackable
 {
-    //Public
-    public string description = "";
-    //public Resoruce resourceTypeRequired;
-    public int resourceCost = 0;
-    public Sprite icon = null;
-
     public GameObject unitSpawnPoint;
 
     // Start is called before the first frame update
