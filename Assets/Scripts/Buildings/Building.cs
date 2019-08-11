@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Building : Attackable
 {
-    public GameObject[] createableUnits = new GameObject[] { null };
+    public GameObject[] createableUnits = new GameObject[12];
 
+    public GameObject unitSpawnPoint;
 
     // Start is called before the first frame update
     void Start()
     {
-        CreateUnit(1);
+        
     }
 
     // Update is called once per frame

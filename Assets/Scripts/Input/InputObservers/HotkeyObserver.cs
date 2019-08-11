@@ -5,27 +5,34 @@ using UnityEngine;
 public class HotkeyObserver : InputObserver
 {
     //Private
-    private Unit m_unit;
+    private Attackable m_attackable;
     private int m_buildIndex;
 
     public HotkeyObserver()
     {
-        m_unit = null;
+        m_attackable = null;
         m_buildIndex = -1;
     }
 
-    public HotkeyObserver(Unit unit, int buildIndex)
+    public HotkeyObserver(Attackable attackable, int buildIndex)
     {
-        m_unit = unit;
+        m_attackable = attackable;
         m_buildIndex = buildIndex;
     }
 
     public override void OnInputEvent(float value)
     {
         //Prevents null reverence
-        if (m_unit != null)
+        if (m_attackable != null)
         {
-            m_unit.BuildBuilding(m_buildIndex);
+            if (m_attackable.GetComponent<Unit>())
+            {
+                m_attackable.GetComponent<Unit>().BuildBuilding(m_buildIndex);
+            }
+            else if (m_attackable.GetComponent<Building>())
+            {
+
+            }
         }
         else
         {

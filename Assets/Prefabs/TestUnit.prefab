@@ -110,7 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseHealth: 10
   m_healthPerUpgrade: 2
-  buildingList:
+  createables:
   - {fileID: 915361347096330268, guid: a39ba03e5780b7c4aa43dfc939702653, type: 3}
   - {fileID: 0}
   - {fileID: 0}
