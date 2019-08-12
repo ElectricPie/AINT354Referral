@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public abstract class Unit : Attackable
 {
+    //Public
+    public float range = 2;
+
     //Protected
     protected int m_damage;
     protected NavMeshAgent m_navAgent;
@@ -16,6 +19,9 @@ public abstract class Unit : Attackable
     private GameObject m_ghostBuilding;
     private CancelGhostBuildingObserver m_cancelBuildingObserver;
     private PlaceBuildingObserver m_placeBuildingObserver;
+
+    private bool m_hasTarget = false;
+    private bool m_isInRangeOfTarget = false;
 
     void Start()
     {
@@ -29,12 +35,23 @@ public abstract class Unit : Attackable
         m_placeBuildingObserver = new PlaceBuildingObserver(this);
     }
 
+    void Update()
+    {
+        if (m_hasTarget == true && Vector3.Distance(m_target.transform.position, this.transform.position) <= range)
+        {
+            m_navAgent.isStopped = true;
+            Debug.Log(this.gameObject + " is in range to attack: " + m_target.gameObject);
+        }
+    }
+
     //Sets the destination of the nav mesh agent
     public void MoveToDestination(Vector3 destination)
     {
         destination.y = this.transform.position.y;
 
         m_navAgent.SetDestination(destination);
+
+        m_navAgent.isStopped = false;
     }
 
     public override void BuildObject(int creatableIndex)
@@ -96,8 +113,18 @@ public abstract class Unit : Attackable
         m_inputHandler.RemoveKeyCodeDownObserver(m_placeBuildingObserver);
     }
 
-    public Attackable Target
+    public void AttackTarget(Attackable target)
     {
-        set { m_target = value; }
+        m_target = target;
+
+        if (m_target != null)
+        {
+            m_hasTarget = true;
+            m_navAgent.SetDestination(m_target.transform.position);
+        }
+        else
+        {
+            m_hasTarget = false;
+        }
     }
 }

@@ -80,7 +80,17 @@ public class PlayerController : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                m_selectedObject.GetComponent<Unit>().MoveToDestination(hit.point);
+                if (hit.transform.gameObject.GetComponent<Attackable>())
+                {
+                    //Sets the units target and calls it to attack the target
+                    m_selectedObject.GetComponent<Unit>().AttackTarget(hit.transform.gameObject.GetComponent<Attackable>());
+                }
+                else
+                {
+                    //Removes the units target and sets its destination
+                    m_selectedObject.GetComponent<Unit>().AttackTarget(null);
+                    m_selectedObject.GetComponent<Unit>().MoveToDestination(hit.point);
+                }
             }
         }
     }
