@@ -4,23 +4,27 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
+
 public abstract class Unit : Attackable
 {
     //Public
     public float range = 2;
+    public int damage = 0;
+    public float attackSpeed;
 
     //Protected
-    protected int m_damage;
     protected NavMeshAgent m_navAgent;
     [SerializeField]
     protected Attackable m_target;
+    protected Animator m_animator;
+    [SerializeField]
+    protected float m_attackTimer = 0.0f;
 
     //Private
     private GameObject m_ghostBuilding;
     private CancelGhostBuildingObserver m_cancelBuildingObserver;
     private PlaceBuildingObserver m_placeBuildingObserver;
 
-    private bool m_hasTarget = false;
     private bool m_isInRangeOfTarget = false;
 
     void Start()
@@ -33,14 +37,29 @@ public abstract class Unit : Attackable
         //Sets up other observers
         m_cancelBuildingObserver = new CancelGhostBuildingObserver(this);
         m_placeBuildingObserver = new PlaceBuildingObserver(this);
+
+        m_animator = this.GetComponent<Animator>();
+
+        if (m_animator != null)
+        {
+            //Sets the attack speed for the attacking animation
+            m_animator.SetFloat("attackSpeed", 1 / attackSpeed);
+        }
     }
 
     void Update()
     {
-        if (m_hasTarget == true && Vector3.Distance(m_target.transform.position, this.transform.position) <= range)
+        Debug.Log("isAttacking: " + m_animator.GetBool("isAttacking"));
+
+        if (m_target != null && Vector3.Distance(m_target.transform.position, this.transform.position) <= range)
         {
             m_navAgent.isStopped = true;
-            Debug.Log(this.gameObject + " is in range to attack: " + m_target.gameObject);
+            Attack();
+        }
+        else
+        {
+            m_animator.SetBool("isAttacking", false);
+            m_navAgent.isStopped = false;
         }
     }
 
@@ -52,6 +71,8 @@ public abstract class Unit : Attackable
         m_navAgent.SetDestination(destination);
 
         m_navAgent.isStopped = false;
+
+        m_animator.SetBool("isAttacking", false);
     }
 
     public override void BuildObject(int creatableIndex)
@@ -119,12 +140,9 @@ public abstract class Unit : Attackable
 
         if (m_target != null)
         {
-            m_hasTarget = true;
             m_navAgent.SetDestination(m_target.transform.position);
         }
-        else
-        {
-            m_hasTarget = false;
-        }
     }
+
+    protected abstract void Attack();
 }
