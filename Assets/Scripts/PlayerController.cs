@@ -53,14 +53,13 @@ public class PlayerController : MonoBehaviour
                 //Selects the new object if it is selectable
                 if (hit.transform.tag == "Selectable")
                 {
-
                     //Selects the new object
                     m_selectedObject = hit.transform.gameObject;
 
                     //Calls the selected objects selection method
-                    if (m_selectedObject.GetComponent<Unit>())
+                    if (m_selectedObject.GetComponent<Attackable>())
                     {
-                        m_selectedObject.GetComponent<Unit>().Select();
+                        m_selectedObject.GetComponent<Attackable>().Select();
                     }
                 }
                 else

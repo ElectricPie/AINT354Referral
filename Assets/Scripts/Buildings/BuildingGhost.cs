@@ -8,8 +8,6 @@ public class BuildingGhost : MonoBehaviour
     //Private
     private BuildingGrid m_grid;
 
-    private bool m_isColliding = false;
-
     private List<GameObject> m_collisionList;
 
     // Start is called before the first frame update
@@ -75,7 +73,6 @@ public class BuildingGhost : MonoBehaviour
         //Prevents the terrain from being a collider
         if (other.tag == "Selectable")
         {
-            m_isColliding = true;
             //Adds it to the list of currely coliding objects
             m_collisionList.Add(other.gameObject);
         }
@@ -85,7 +82,6 @@ public class BuildingGhost : MonoBehaviour
     {
         if (other.tag == "Selectable")
         {
-            m_isColliding = false;
             //Removes it to the list of currely coliding objects
             m_collisionList.Remove(other.gameObject);
         }
