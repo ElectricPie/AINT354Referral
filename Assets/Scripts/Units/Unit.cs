@@ -9,6 +9,8 @@ public abstract class Unit : Attackable
     //Protected
     protected int m_damage;
     protected NavMeshAgent m_navAgent;
+    [SerializeField]
+    protected Attackable m_target;
 
     //Private
     private GameObject m_ghostBuilding;
@@ -92,5 +94,10 @@ public abstract class Unit : Attackable
         //Removes the cancel keycode observers
         m_inputHandler.RemoveKeyCodeDownObserver(m_cancelBuildingObserver);
         m_inputHandler.RemoveKeyCodeDownObserver(m_placeBuildingObserver);
+    }
+
+    public Attackable Target
+    {
+        set { m_target = value; }
     }
 }

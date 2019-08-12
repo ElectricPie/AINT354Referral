@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
+                Debug.Log("Selecting raycast: " + hit.transform.gameObject);
                 //Calls the previouslty selected object and calls its deselection method
                 if (m_selectedObject != null)
                 {
