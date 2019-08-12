@@ -35,7 +35,7 @@ public class BuildingGhost : MonoBehaviour
                 //Gets the position of the nearest point from the grid
                 Vector3 position = m_grid.GetNearestPoint(hit.point);
                 //Fixes the y position so it dose not float
-                position.y = 1;
+                position.y = 0;
 
                 this.transform.position = position;
             }

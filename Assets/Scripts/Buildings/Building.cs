@@ -50,7 +50,10 @@ public class Building : Attackable
     //Draws a gizmo to show the unit spawn point
     void OnDrawGizmos()
     {
-        Gizmos.color = new Color(0, 1, 0, 1);
-        Gizmos.DrawCube(unitSpawnPoint.transform.position, new Vector3(0.1f, 0.1f, 0.1f));
+        if (unitSpawnPoint != null)
+        {
+            Gizmos.color = new Color(0, 1, 0, 1);
+            Gizmos.DrawCube(unitSpawnPoint.transform.position, new Vector3(0.1f, 0.1f, 0.1f));
+        }
     }
 }
