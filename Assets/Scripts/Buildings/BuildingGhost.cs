@@ -8,15 +8,13 @@ public class BuildingGhost : MonoBehaviour
     //Private
     private BuildingGrid m_grid;
 
-    private bool m_isColliding = false;
-
     private List<GameObject> m_collisionList;
 
     // Start is called before the first frame update
     void Start()
     {
+        //Prevents the raycast from hitting the building
         this.gameObject.layer = 2;
-        //this.GetComponent<Collider>().enabled = false;
         this.GetComponent<NavMeshObstacle>().enabled = false;
 
         m_grid = GameObject.Find("_Grid").GetComponent<BuildingGrid>();
@@ -37,7 +35,7 @@ public class BuildingGhost : MonoBehaviour
                 //Gets the position of the nearest point from the grid
                 Vector3 position = m_grid.GetNearestPoint(hit.point);
                 //Fixes the y position so it dose not float
-                position.y = 1;
+                position.y = 0;
 
                 this.transform.position = position;
             }
@@ -53,6 +51,9 @@ public class BuildingGhost : MonoBehaviour
         //Places the building if nothing is colliding with it and returns if it is succesful
         if (m_collisionList.Count == 0)
         {
+            //Allows raycasts to hit the building
+            this.gameObject.layer = 0;
+
             //Renables the nav mesh obstical so units will pathfind around it
             this.GetComponent<NavMeshObstacle>().enabled = true;
 
@@ -72,7 +73,6 @@ public class BuildingGhost : MonoBehaviour
         //Prevents the terrain from being a collider
         if (other.tag == "Selectable")
         {
-            m_isColliding = true;
             //Adds it to the list of currely coliding objects
             m_collisionList.Add(other.gameObject);
         }
@@ -82,7 +82,6 @@ public class BuildingGhost : MonoBehaviour
     {
         if (other.tag == "Selectable")
         {
-            m_isColliding = false;
             //Removes it to the list of currely coliding objects
             m_collisionList.Remove(other.gameObject);
         }

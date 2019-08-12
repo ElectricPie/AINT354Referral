@@ -110,7 +110,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseHealth: 10
   m_healthPerUpgrade: 2
-  buildingList:
+  description: 
+  resourceCost: 0
+  icon: {fileID: 21300000, guid: b7d80d97271e3044c99daa0e0d644134, type: 3}
+  createables:
   - {fileID: 915361347096330268, guid: a39ba03e5780b7c4aa43dfc939702653, type: 3}
   - {fileID: 0}
   - {fileID: 0}

@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private SelectObserver m_selectObserver;
     private MoveObserver m_moveObserver;
 
+    [SerializeField]
     private GameObject m_selectedObject;
 
     // Start is called before the first frame update
@@ -52,14 +53,13 @@ public class PlayerController : MonoBehaviour
                 //Selects the new object if it is selectable
                 if (hit.transform.tag == "Selectable")
                 {
-
                     //Selects the new object
                     m_selectedObject = hit.transform.gameObject;
 
                     //Calls the selected objects selection method
-                    if (m_selectedObject.GetComponent<Unit>())
+                    if (m_selectedObject.GetComponent<Attackable>())
                     {
-                        m_selectedObject.GetComponent<Unit>().Select();
+                        m_selectedObject.GetComponent<Attackable>().Select();
                     }
                 }
                 else
@@ -84,16 +84,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void BuildFromSelectedUnit(int buildingIndexValue)
+    public void BuildFromSelectedUnit(int objectIndexValue)
     {
         //Error prevention
         if(m_selectedObject != null)
         {
             //Makes sure the object is a unit
-            if (m_selectedObject.GetComponent<Unit>())
+            if (m_selectedObject.GetComponent<Attackable>())
             {
                 //Calls the method for creating a building from the selected unit
-                m_selectedObject.GetComponent<Unit>().BuildBuilding(buildingIndexValue);
+                m_selectedObject.GetComponent<Attackable>().BuildObject(objectIndexValue);
             }
         }
        
