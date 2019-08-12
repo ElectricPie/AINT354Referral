@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7877651894526016319}
   - component: {fileID: 4847351985489782105}
   - component: {fileID: 4113044569854104096}
-  - component: {fileID: 3931361042547187958}
   - component: {fileID: 111961571}
   - component: {fileID: 7948287667910887933}
   - component: {fileID: -7738534362767722636}
@@ -98,21 +97,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3931361042547187958
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 915361347096330268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 994a9aa2af64956478c3bbb2770359ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  description: A building used for testing
-  resourceCost: 10
-  icon: {fileID: 21300000, guid: 163bb116d89e62147ad30d381f21497a, type: 3}
 --- !u!208 &111961571
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -159,22 +143,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseHealth: 0
   m_healthPerUpgrade: 0
-  createables:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   description: 
   resourceCost: 0
   icon: {fileID: 21300000, guid: 163bb116d89e62147ad30d381f21497a, type: 3}
+  createables:
+  - {fileID: 8970713159666227673, guid: d22ae7bd097ce3f42b6166f915ca09e3, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   unitSpawnPoint: {fileID: 4079205210913120006}
 --- !u!1 &4079205210913120006
 GameObject:
@@ -200,7 +184,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4079205210913120006}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.888, y: 0, z: 0}
   m_LocalScale: {x: 0.2, y: 0.5, z: 0.2}
   m_Children: []
   m_Father: {fileID: 4583869663832295571}

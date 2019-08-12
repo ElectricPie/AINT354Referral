@@ -35,16 +35,16 @@ public abstract class Unit : Attackable
         m_navAgent.SetDestination(destination);
     }
 
-    public void BuildBuilding(int buildingIndexValue)
+    public override void BuildObject(int creatableIndex)
     {
-        if (createables[buildingIndexValue] != null)
+        if (createables[creatableIndex] != null)
         {
             //Disables the hotkeys and the build menu so that it no other building ghost are created
             DisableHotkeys();
             DisableUIBuildMenu();
 
             //Creats a new building in the game
-            m_ghostBuilding = Instantiate(createables[buildingIndexValue]);
+            m_ghostBuilding = Instantiate(createables[creatableIndex]);
             m_ghostBuilding.AddComponent<BuildingGhost>();
 
 

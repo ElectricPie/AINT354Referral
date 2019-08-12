@@ -25,13 +25,9 @@ public class HotkeyObserver : InputObserver
         //Prevents null reverence
         if (m_attackable != null)
         {
-            if (m_attackable.GetComponent<Unit>())
+            if (m_attackable.GetComponent<Attackable>())
             {
-                m_attackable.GetComponent<Unit>().BuildBuilding(m_buildIndex);
-            }
-            else if (m_attackable.GetComponent<Building>())
-            {
-
+                m_attackable.GetComponent<Attackable>().BuildObject(m_buildIndex);
             }
         }
         else

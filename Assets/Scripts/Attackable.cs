@@ -36,9 +36,7 @@ public abstract class Attackable : MonoBehaviour
         m_maxHealth = baseHealth;
         m_currentHealth = baseHealth;
 
-
         m_buildButtons = GameObject.Find("BuildMenu").GetComponent<BuildMenuButtons>();
-        Debug.Log("building buttons: " + m_buildButtons);
 
         GameObject playerObject = GameObject.Find("_PlayerController");
         m_inputHandler = playerObject.GetComponent<InputHandler>();
@@ -89,11 +87,11 @@ public abstract class Attackable : MonoBehaviour
             //Checks if the building isnt null
             if (createables[i] != null)
             {
-                if (createables[i].GetComponent<Building>())
+                if (createables[i].GetComponent<Attackable>())
                 {
                     m_buildButtons.buttons[i].SetActive(true);
                     //Changes the buttons sprite
-                    m_buildButtons.buttons[i].GetComponent<Image>().sprite = createables[i].GetComponent<Building>().icon;
+                    m_buildButtons.buttons[i].GetComponent<Image>().sprite = createables[i].GetComponent<Attackable>().icon;
                 }
             }
             else
@@ -142,4 +140,6 @@ public abstract class Attackable : MonoBehaviour
             }
         }
     }
+
+    public abstract void BuildObject(int creatableIndex);
 }

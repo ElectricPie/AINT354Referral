@@ -84,16 +84,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void BuildFromSelectedUnit(int buildingIndexValue)
+    public void BuildFromSelectedUnit(int objectIndexValue)
     {
         //Error prevention
         if(m_selectedObject != null)
         {
             //Makes sure the object is a unit
-            if (m_selectedObject.GetComponent<Unit>())
+            if (m_selectedObject.GetComponent<Attackable>())
             {
                 //Calls the method for creating a building from the selected unit
-                m_selectedObject.GetComponent<Unit>().BuildBuilding(buildingIndexValue);
+                m_selectedObject.GetComponent<Attackable>().BuildObject(objectIndexValue);
             }
         }
        
