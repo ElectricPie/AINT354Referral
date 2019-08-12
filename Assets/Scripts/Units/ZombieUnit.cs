@@ -11,6 +11,19 @@ public class ZombieUnit : Unit
 
     protected override void Die()
     {
+        if (m_animator != null)
+        {
+            m_animator.SetTrigger("isAlive");
+        }
+
+        //Prevents the unit from being selected
+        this.GetComponent<Collider>().enabled = false;
+
+        Invoke("Destroy", 4);
+    }
+
+    private void Destroy()
+    {
         Destroy(this.gameObject);
     }
 }

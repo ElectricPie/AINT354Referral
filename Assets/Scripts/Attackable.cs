@@ -50,7 +50,7 @@ public abstract class Attackable : MonoBehaviour
         }
     }
 
-    public void ReciveAttack(int damage)
+    public void ReciveAttack(int damage, Unit attacker)
     {
         Debug.Log("Recived Hit: " + damage);
 
@@ -59,6 +59,7 @@ public abstract class Attackable : MonoBehaviour
         //Checks if the attackables health is below 0 and if it is calls its death code
         if (m_currentHealth <= 0)
         {
+            attacker.StopAttacking();
             Die();
         }
     }

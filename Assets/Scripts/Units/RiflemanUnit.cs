@@ -12,7 +12,7 @@ public class RiflemanUnit : Unit
         if (m_attackTimer >= attackSpeed)
         {
             m_attackTimer = 0.0f;
-            m_target.ReciveAttack(damage);
+            m_target.ReciveAttack(damage, this);
         }
         else
         {

@@ -49,8 +49,6 @@ public abstract class Unit : Attackable
 
     void Update()
     {
-        Debug.Log("isAttacking: " + m_animator.GetBool("isAttacking"));
-
         if (m_target != null && Vector3.Distance(m_target.transform.position, this.transform.position) <= range)
         {
             m_navAgent.isStopped = true;
@@ -59,13 +57,13 @@ public abstract class Unit : Attackable
         else
         {
             m_animator.SetBool("isAttacking", false);
-            m_navAgent.isStopped = false;
         }
     }
 
     //Sets the destination of the nav mesh agent
     public void MoveToDestination(Vector3 destination)
     {
+        destination.y = this.transform.position.y;
         destination.y = this.transform.position.y;
 
         m_navAgent.SetDestination(destination);
@@ -142,6 +140,11 @@ public abstract class Unit : Attackable
         {
             m_navAgent.SetDestination(m_target.transform.position);
         }
+    }
+
+    public void StopAttacking()
+    {
+        m_target = null;
     }
 
     protected abstract void Attack();
