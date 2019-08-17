@@ -27,7 +27,7 @@ public abstract class Unit : Attackable
 
     private bool m_isInRangeOfTarget = false;
 
-    void Start()
+    protected void Start()
     {
         //Calls the base start method
         base.Start();
