@@ -6,7 +6,8 @@ public class ZombieUnit : Unit
 {
     protected override void Attack()
     {
-        throw new System.NotImplementedException();
+        //Syncs the attack with the animation
+        Invoke("DamageTarget", 1.2f);
     }
 
     protected override void Die()
@@ -25,5 +26,11 @@ public class ZombieUnit : Unit
     private void Destroy()
     {
         Destroy(this.gameObject);
+    }
+
+    private void DamageTarget()
+    {
+        //Deals the damage to the target
+        m_target.ReciveAttack(damage, this);
     }
 }

@@ -649,6 +649,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ZombieUnit
       objectReference: {fileID: 0}
+    - target: {fileID: 1040389978382215157, guid: 58c2ce73b40a3e049b54c9347aee2e4a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Selectable
+      objectReference: {fileID: 0}
     - target: {fileID: 4047448488551634406, guid: 58c2ce73b40a3e049b54c9347aee2e4a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -745,7 +750,7 @@ MonoBehaviour:
   m_currentHealth: 0
   range: 2
   damage: 2
-  attackSpeed: 3
+  attackSpeed: 2.5
   m_target: {fileID: 0}
   m_attackTimer: 0
 --- !u!195 &248195157

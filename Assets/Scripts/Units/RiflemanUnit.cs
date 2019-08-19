@@ -17,28 +17,13 @@ public class RiflemanUnit : Unit
 
     protected override void Attack()
     {
-        m_animator.SetBool("isAttacking", true);
-
-        //Attacks the target every (attack speed) amount of time
-        if (m_attackTimer >= attackSpeed)
-        {
-            //Resets the attack timer after the rifleman has fired
-            m_attackTimer = 0.0f;
-            //Deals the damage to the target
-            m_target.ReciveAttack(damage, this);
-
-            //Lines the muzzle flash with the animation
-            Invoke("EnableFlash", 0.8f);
-        }
-        else
-        {
-            m_attackTimer += Time.deltaTime;
-        }
+        //Lines the muzzle flash with the animation
+        Invoke("EnableFlash", 0.8f);
     }
 
     protected override void Die()
     {
-        throw new System.NotImplementedException();
+        m_animator.SetBool("isAlive", false);
     }
 
     private void EnableFlash()

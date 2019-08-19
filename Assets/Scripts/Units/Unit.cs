@@ -52,7 +52,20 @@ public abstract class Unit : Attackable
         if (m_target != null && Vector3.Distance(m_target.transform.position, this.transform.position) <= range)
         {
             m_navAgent.isStopped = true;
-            Attack();
+
+            m_animator.SetBool("isAttacking", true);
+
+            //Attacks the target every (attack speed) amount of time
+            if (m_attackTimer >= attackSpeed)
+            {
+                //Resets the attack timer after the rifleman has fired
+                m_attackTimer = 0.0f;
+                Attack();
+            }
+            else
+            {
+                m_attackTimer += Time.deltaTime;
+            }
         }
         else
         {
