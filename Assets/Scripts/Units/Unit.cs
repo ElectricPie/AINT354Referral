@@ -25,6 +25,7 @@ public abstract class Unit : Attackable
     private GameObject m_ghostBuilding;
     private CancelGhostBuildingObserver m_cancelBuildingObserver;
     private PlaceBuildingObserver m_placeBuildingObserver;
+    private ResourceCounter m_resourceCounter;
 
     protected void Start()
     {
@@ -53,6 +54,8 @@ public abstract class Unit : Attackable
         {
             Debug.LogWarning("AI Controller not found!");
         }
+
+        m_resourceCounter = m_playerController.GetComponent<ResourceCounter>();
     }
 
     protected void Update()
@@ -137,17 +140,22 @@ public abstract class Unit : Attackable
 
     public void CreateBuilding()
     {
-        //Resets the keybindings if placing the building was succesful
-        if (m_ghostBuilding.GetComponent<BuildingGhost>().PlaceBuilding())
-        {
-            m_playerController.SelectedObject = this.gameObject;
+        Attackable buildingInfo = m_ghostBuilding.GetComponent<Attackable>();
 
-            RenableBuilding();
-        }
-        else
+        //Checks if there are enough resources to create the building
+        if (m_resourceCounter.ReduceResourceAmount(buildingInfo.resourceTypeRequired, buildingInfo.resourceCost))
         {
-            Debug.Log("Cannot Place Building");
+            //Resets the keybindings if placing the building was succesful
+            if (m_ghostBuilding.GetComponent<BuildingGhost>().PlaceBuilding())
+            {
+                m_playerController.SelectedObject = this.gameObject;
+
+                RenableBuilding();
+            }
+            Debug.Log("Cannot Place Building: Other Object Blocking Placement");
         }
+
+        Debug.Log("Cannot Place Building: Insufficent Resource");
     }
 
     private void RenableBuilding()

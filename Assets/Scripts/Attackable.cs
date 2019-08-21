@@ -9,7 +9,8 @@ public abstract class Attackable : MonoBehaviour
     public int m_healthPerUpgrade;
 
     public string description = "";
-    //public Resoruce resourceTypeRequired;
+    [Range(0,2)]
+    public int resourceTypeRequired;
     public int resourceCost = 0;
     public Sprite icon = null;
 

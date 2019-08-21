@@ -135,7 +135,8 @@ MonoBehaviour:
   baseHealth: 100
   m_healthPerUpgrade: 5
   description: 
-  resourceCost: 0
+  resourceTypeRequired: 0
+  resourceCost: 20
   icon: {fileID: 21300000, guid: 37ab107aaed8a6947862958859db35bc, type: 3}
   createables:
   - {fileID: 8970713159666227673, guid: d22ae7bd097ce3f42b6166f915ca09e3, type: 3}
