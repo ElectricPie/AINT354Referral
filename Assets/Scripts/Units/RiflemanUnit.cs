@@ -26,6 +26,7 @@ public class RiflemanUnit : Unit
     protected override void Die()
     {
         m_animator.SetBool("isAlive", false);
+        Invoke("Destroy", 5.0f);
     }
 
     private void EnableFlash()
@@ -45,5 +46,10 @@ public class RiflemanUnit : Unit
     private void OnDestroy()
     {
         m_aiController.RemoveEnemy(this.gameObject);
+    }
+
+    private void Destroy()
+    {
+        Destroy(this.gameObject);
     }
 }

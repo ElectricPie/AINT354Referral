@@ -14,9 +14,21 @@ public class ZombieUnit : Unit
     {
         base.Update();
 
+        //Gets a target if it the zombie dosent have one. 
         if (m_target == null)
         {
-            m_target = m_aiController.GetClosestEnemy(this.gameObject).GetComponent<Attackable>();
+            //Gets the closest enemy from the ai controller
+            GameObject closestEnemy = m_aiController.GetClosestEnemy(this.gameObject);
+
+            //If there is an enemy set it as the target
+            if (closestEnemy != null)
+            {
+                m_target = closestEnemy.GetComponent<Attackable>();
+            }
+            else
+            {
+                m_target = null;
+            }
         }
     }
 
@@ -40,7 +52,11 @@ public class ZombieUnit : Unit
 
     private void DamageTarget()
     {
-        //Deals the damage to the target
-        m_target.ReciveAttack(damage, this);
+        //Prevents attemting to damage the target if there isnt one
+        if (m_target != null)
+        {
+            //Deals the damage to the target
+            m_target.ReciveAttack(damage, this);
+        }
     }
 }
