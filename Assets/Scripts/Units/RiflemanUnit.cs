@@ -13,6 +13,8 @@ public class RiflemanUnit : Unit
 
         m_muzzleFlashLight = muzzleFlash.gameObject.transform.GetChild(1).gameObject;
         DisableFlash();
+
+        m_aiController.AddNewEnemy(this.gameObject);
     }
 
     protected override void Attack()
@@ -38,5 +40,10 @@ public class RiflemanUnit : Unit
     {
         muzzleFlash.Stop(true);
         m_muzzleFlashLight.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        m_aiController.RemoveEnemy(this.gameObject);
     }
 }

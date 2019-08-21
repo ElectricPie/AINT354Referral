@@ -10,6 +10,16 @@ public class ZombieUnit : Unit
         Invoke("DamageTarget", 1.2f);
     }
 
+    void Update()
+    {
+        base.Update();
+
+        if (m_target == null)
+        {
+            m_target = m_aiController.GetClosestEnemy(this.gameObject).GetComponent<Attackable>();
+        }
+    }
+
     protected override void Die()
     {
         if (m_animator != null)

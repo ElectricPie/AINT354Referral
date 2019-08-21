@@ -19,6 +19,7 @@ public abstract class Unit : Attackable
     protected Animator m_animator;
     [SerializeField]
     protected float m_attackTimer = 0.0f;
+    protected AIController m_aiController;
 
     //Private
     private GameObject m_ghostBuilding;
@@ -45,12 +46,23 @@ public abstract class Unit : Attackable
             //Sets the attack speed for the attacking animation
             m_animator.SetFloat("attackSpeed", 1 / attackSpeed);
         }
+
+        //Finds the AI controller
+        m_aiController = GameObject.Find("_AIController").GetComponent<AIController>();
+
+        //Sends a message if the ai controller cannot be found
+        if (m_aiController == null)
+        {
+            Debug.LogWarning("AI Controller not found!");
+        }
     }
 
-    void Update()
+    protected void Update()
     {
+        //Attacks the target if in range
         if (m_target != null && Vector3.Distance(m_target.transform.position, this.transform.position) <= range)
         {
+            Debug.Log("Attacking");
             m_navAgent.isStopped = true;
 
             m_animator.SetBool("isAttacking", true);
@@ -67,8 +79,17 @@ public abstract class Unit : Attackable
                 m_attackTimer += Time.deltaTime;
             }
         }
+        //Move to the target if there is one
+        else if(m_target != null && Vector3.Distance(m_target.transform.position, this.transform.position) >= range)
+        {
+            Debug.Log("Moving to target");
+            AttackTarget(m_target);
+            m_animator.SetBool("isAttacking", false);
+        }
+        //Do nothing
         else
         {
+            Debug.Log("No target");
             m_animator.SetBool("isAttacking", false);
         }
     }
@@ -151,6 +172,7 @@ public abstract class Unit : Attackable
 
         if (m_target != null)
         {
+            m_navAgent.isStopped = false;
             m_navAgent.SetDestination(m_target.transform.position);
         }
     }
