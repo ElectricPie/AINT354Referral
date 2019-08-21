@@ -26,8 +26,6 @@ public abstract class Unit : Attackable
     private CancelGhostBuildingObserver m_cancelBuildingObserver;
     private PlaceBuildingObserver m_placeBuildingObserver;
 
-    private bool m_isInRangeOfTarget = false;
-
     protected void Start()
     {
         //Calls the base start method
@@ -62,7 +60,6 @@ public abstract class Unit : Attackable
         //Attacks the target if in range
         if (m_target != null && Vector3.Distance(m_target.transform.position, this.transform.position) <= range)
         {
-            Debug.Log("Attacking");
             m_navAgent.isStopped = true;
 
             m_animator.SetBool("isAttacking", true);
@@ -82,14 +79,12 @@ public abstract class Unit : Attackable
         //Move to the target if there is one
         else if(m_target != null && Vector3.Distance(m_target.transform.position, this.transform.position) >= range)
         {
-            Debug.Log("Moving to target");
             AttackTarget(m_target);
             m_animator.SetBool("isAttacking", false);
         }
         //Do nothing
         else
         {
-            Debug.Log("No target");
             m_animator.SetBool("isAttacking", false);
         }
     }

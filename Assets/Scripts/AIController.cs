@@ -52,8 +52,6 @@ public class AIController : MonoBehaviour
 
     public void AddNewEnemy(GameObject newEnemy)
     {
-        Debug.Log("Enemy Count: " + m_enemies.Count);
-
         //Checks if the enemy is already in the list
         foreach (GameObject enemy in m_enemies)
         {
