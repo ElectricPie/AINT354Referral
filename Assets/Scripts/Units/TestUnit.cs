@@ -8,6 +8,11 @@ public class TestUnit : Unit
 
     }
 
+    protected override void Attack()
+    {
+        throw new System.NotImplementedException();
+    }
+
     protected override void Die()
     {
         Destroy(this.gameObject);

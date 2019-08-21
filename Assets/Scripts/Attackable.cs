@@ -19,6 +19,7 @@ public abstract class Attackable : MonoBehaviour
     protected string m_name;
     protected string m_discription;
     protected int m_maxHealth;
+    [SerializeField]
     protected int m_currentHealth;
 
     //Private
@@ -49,13 +50,14 @@ public abstract class Attackable : MonoBehaviour
         }
     }
 
-    public void ReciveAttack(int damage)
+    public void ReciveAttack(int damage, Unit attacker)
     {
         m_currentHealth -= damage;
 
         //Checks if the attackables health is below 0 and if it is calls its death code
         if (m_currentHealth <= 0)
         {
+            attacker.StopAttacking();
             Die();
         }
     }
