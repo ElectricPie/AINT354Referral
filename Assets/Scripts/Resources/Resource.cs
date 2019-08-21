@@ -6,6 +6,7 @@ public abstract class Resource
 {
     //Public
     public int amount = 0;
+    public int maxAmount = 100;
 
     //Private
     private string m_name;

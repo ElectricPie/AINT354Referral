@@ -4,22 +4,24 @@ using UnityEngine;
 
 public class ResourceCounter : MonoBehaviour
 {
-    private Resource[] m_resources = new Resource[] { new ScrapResource() };
+    //Public
+    public ResourceUIBar uiBar;
+
+    //Private
+    private Resource[] m_resources = new Resource[3] { new ScrapResource(), null, null };
 
     // Start is called before the first frame update
     void Start()
     {
-        IncreaseResourceAmount(1, 3);
-
-        IncreaseResourceAmount(-1, 3);
-
         InvokeRepeating("Test", 0.0f, 1.0f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Scrap Amount: " + m_resources[0].amount);
+        UpdateUI(0);
+        UpdateUI(1);
+        UpdateUI(2);
     }
 
     private void Test()
@@ -44,7 +46,17 @@ public class ResourceCounter : MonoBehaviour
         //Prevents attempts at adding to a nonexistant resources
         if (CheckValidResource(resourceIndex))
         {
-            m_resources[resourceIndex].amount += amountToBeAdded;
+            //Prevents the resource from going above the max amout
+            if ((m_resources[resourceIndex].amount + amountToBeAdded) > m_resources[resourceIndex].maxAmount)
+            {
+                m_resources[resourceIndex].amount = m_resources[resourceIndex].maxAmount;
+            }
+            else
+            {
+                m_resources[resourceIndex].amount += amountToBeAdded;
+            }
+                
+            UpdateUI(resourceIndex);
         }
     }
 
@@ -57,6 +69,8 @@ public class ResourceCounter : MonoBehaviour
             {
                 m_resources[resourceIndex].amount -= amountToBeRemoved;
 
+                UpdateUI(resourceIndex);
+
                 //Returns true if the removal was succesful
                 return true;
             }
@@ -64,5 +78,32 @@ public class ResourceCounter : MonoBehaviour
 
         //Returns false if the amount couldnt be removed
         return false;
+    }
+
+    private void UpdateUI(int resourceIndex)
+    {
+        //Prevents null reference
+        if (uiBar != null)
+        {
+            if (CheckValidResource(resourceIndex))
+            {
+                if (m_resources[resourceIndex] == null)
+                {
+                    uiBar.UpdateTab(resourceIndex, 0, 0);
+                }
+                else
+                {
+                    uiBar.UpdateTab(resourceIndex, m_resources[resourceIndex].amount, m_resources[resourceIndex].maxAmount);
+                }
+            }
+            else
+            {
+                Debug.LogError("Invalid Resource, Index out of range");
+            }
+        }
+        else
+        {
+            Debug.LogError("Resource UI Bar missing!");
+        }
     }
 }
