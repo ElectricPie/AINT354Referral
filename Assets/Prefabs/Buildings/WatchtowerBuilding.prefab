@@ -135,7 +135,8 @@ MonoBehaviour:
   baseHealth: 50
   m_healthPerUpgrade: 5
   description: A defensive structure that can attack hostile units
-  resourceCost: 50
+  resourceTypeRequired: 0
+  resourceCost: 30
   icon: {fileID: 21300000, guid: 386aa0b0c847e724688be33c8084013d, type: 3}
   createables:
   - {fileID: 8970713159666227673, guid: d22ae7bd097ce3f42b6166f915ca09e3, type: 3}
@@ -150,6 +151,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  m_currentHealth: 0
   unitSpawnPoint: {fileID: 531174965385773606}
 --- !u!1001 &4095860025740911094
 PrefabInstance:
@@ -158,11 +160,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 26474571643852211}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 8d33a1433f2e5a34d9e96588266473f8,
-        type: 3}
-      propertyPath: m_Name
-      value: Watchtower
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 8d33a1433f2e5a34d9e96588266473f8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -217,6 +214,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 8d33a1433f2e5a34d9e96588266473f8,
+        type: 3}
+      propertyPath: m_Name
+      value: Watchtower
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d33a1433f2e5a34d9e96588266473f8, type: 3}

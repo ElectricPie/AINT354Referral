@@ -25,7 +25,6 @@ public abstract class Unit : Attackable
     private GameObject m_ghostBuilding;
     private CancelGhostBuildingObserver m_cancelBuildingObserver;
     private PlaceBuildingObserver m_placeBuildingObserver;
-    private ResourceCounter m_resourceCounter;
 
     protected void Start()
     {
@@ -54,8 +53,6 @@ public abstract class Unit : Attackable
         {
             Debug.LogWarning("AI Controller not found!");
         }
-
-        m_resourceCounter = m_playerController.GetComponent<ResourceCounter>();
     }
 
     protected void Update()
