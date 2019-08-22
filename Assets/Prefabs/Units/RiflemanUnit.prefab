@@ -934,8 +934,8 @@ MonoBehaviour:
   resourceCost: 20
   icon: {fileID: 0}
   createables:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 4116476565515155876, guid: 716987856c9974f4b91b739c9edc2283, type: 3}
+  - {fileID: 3708475820747824444, guid: 0cf8d170070c8724793ce5d77ab2e7fd, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -3228,10 +3228,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 352663767612777983}
     m_Modifications:
-    - target: {fileID: 100006, guid: c888f0c922d622147bbdbe2ca794142b, type: 3}
-      propertyPath: m_Name
-      value: WFX_MF 4P RIFLE1
-      objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: c888f0c922d622147bbdbe2ca794142b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.44
@@ -3287,6 +3283,10 @@ PrefabInstance:
     - target: {fileID: 400006, guid: c888f0c922d622147bbdbe2ca794142b, type: 3}
       propertyPath: m_LocalScale.z
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: c888f0c922d622147bbdbe2ca794142b, type: 3}
+      propertyPath: m_Name
+      value: WFX_MF 4P RIFLE1
       objectReference: {fileID: 0}
     - target: {fileID: 19800006, guid: c888f0c922d622147bbdbe2ca794142b, type: 3}
       propertyPath: looping

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Building : Attackable
 {
@@ -25,16 +26,29 @@ public class Building : Attackable
 
     public override void BuildObject(int creatableIndex)
     {
+        
         if (createables[creatableIndex] != null)
         {
-            //Disables the hotkeys and the build menu so that it no other building ghost are created
-            DisableHotkeys();
-            DisableUIBuildMenu();
+            Attackable unitInfo = createables[creatableIndex].GetComponent<Attackable>();
 
-            //Creats a new unit in the game
-            GameObject newUnit = Instantiate(createables[creatableIndex]);
-            //Moves the new unit to the spawn point
-            newUnit.transform.position = unitSpawnPoint.transform.position;
+            if (m_resourceCounter.ReduceResourceAmount(unitInfo.resourceTypeRequired, unitInfo.resourceCost))
+            {
+                //Disables the hotkeys and the build menu so that it no other building ghost are created
+                DisableHotkeys();
+                DisableUIBuildMenu();
+
+                //Creats a new unit in the game
+                GameObject newUnit = Instantiate(createables[creatableIndex]);
+
+                Debug.Log("Spawnpoint: " + unitSpawnPoint.transform.position);
+                //Moves the new unit to the spawn point
+                //newUnit.transform.position = unitSpawnPoint.transform.position;
+                newUnit.GetComponent<NavMeshAgent>().Warp(unitSpawnPoint.transform.position);
+            }
+            else
+            {
+                Debug.Log("Insufficient resources to create unit");
+            }
         }
         else
         {

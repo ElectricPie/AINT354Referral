@@ -9,7 +9,8 @@ public abstract class Attackable : MonoBehaviour
     public int m_healthPerUpgrade;
 
     public string description = "";
-    //public Resoruce resourceTypeRequired;
+    [Range(0,2)]
+    public int resourceTypeRequired;
     public int resourceCost = 0;
     public Sprite icon = null;
 
@@ -30,6 +31,7 @@ public abstract class Attackable : MonoBehaviour
     protected HotkeyObserver[] m_hotkeyObservers = new HotkeyObserver[12];
     protected InputHandler m_inputHandler;
     protected PlayerController m_playerController;
+    protected ResourceCounter m_resourceCounter;
 
     // Start is called before the first frame update
     protected void Start()
@@ -48,6 +50,8 @@ public abstract class Attackable : MonoBehaviour
         {
             m_hotkeyObservers[i] = new HotkeyObserver(this, i);
         }
+
+        m_resourceCounter = m_playerController.GetComponent<ResourceCounter>();
     }
 
     public void ReciveAttack(int damage, Unit attacker)
