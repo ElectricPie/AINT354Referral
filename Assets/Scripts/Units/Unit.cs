@@ -60,6 +60,7 @@ public abstract class Unit : Attackable
         //Attacks the target if in range
         if (m_target != null && Vector3.Distance(m_target.transform.position, this.transform.position) <= range)
         {
+            Debug.Log(this.gameObject + "Attacking");
             m_navAgent.isStopped = true;
 
             m_animator.SetBool("isAttacking", true);
@@ -67,7 +68,10 @@ public abstract class Unit : Attackable
             //Attacks the target every (attack speed) amount of time
             if (m_attackTimer >= attackSpeed)
             {
-                //Resets the attack timer after the rifleman has fired
+                Debug.Log(this.gameObject + " attacking " + m_target);
+                m_target.ReciveAttack(damage, this);
+
+                //Resets the attack timer after the unit has attacked
                 m_attackTimer = 0.0f;
                 Attack();
             }
@@ -92,6 +96,7 @@ public abstract class Unit : Attackable
     //Sets the destination of the nav mesh agent
     public void MoveToDestination(Vector3 destination)
     {
+        destination.y = this.transform.position.y;
         destination.y = this.transform.position.y;
         destination.y = this.transform.position.y;
 
